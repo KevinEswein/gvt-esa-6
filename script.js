@@ -23,6 +23,7 @@ var app = (function() {
 
 	var animationActive = true;
 	var lastTime = 0;
+	var angleOffset = 0;
 
 	function start() {
 		init();
@@ -32,7 +33,7 @@ var app = (function() {
 	function init() {
 		initWebGL();
 		initShaderProgram();
-		initUniforms()
+		initUniforms();
 		initModels();
 		initEventHandler();
 		initPipline();
@@ -89,12 +90,12 @@ var app = (function() {
 
 	function initModels() {
 		var fs = "fill";
-		createModel("torus", fs, [ 1, 1, 1, 1 ], [ 0, 0, 0 ], [ 0, 0, 0 ], [1, 1, 1 ]);
+		createModel("torus", fs, [ 1, 1, 1, 1 ], [ 0, 1, 0 ], [ 0, 0, 0 ], [2, 2, 2 ]);
 		createModel("plane", "wireframe", [ 1, 1, 1, 1 ], [ 0, -.8, 0 ], [0, 0, 0 ], [ 1, 1, 1 ]);
-		createModel("sphere", fs, [ 0, 1, 1, 1 ], [ 1, -.3, -1 ], [ 0, 0, 0 ], [ .5, .5, .5 ]);
-		createModel("sphere", fs, [ 1, 0, 1, 1 ], [ -1, -.3, -1 ], [ 0, 0, 0 ], [ .5, .5, .5 ]);
-		createModel("sphere", fs, [ 0, 0, 1, 1 ], [ 1, -.3, 1 ], [ 0, 0, 0 ], [ .5, .5, .5 ]);
-		createModel("sphere", fs, [ 1, 1, 0, 1 ], [ -1, -.3, 1 ], [ 0, 0, 0 ], [ .5, .5, .5 ]);
+		createModel("sphere", fs, [ 0, 1, 1, 1 ], [ 1, -.3, -1 ], [ 0, 0, 0 ], [ .25, .25, .25 ]);
+		createModel("sphere", fs, [ 1, 0, 1, 1 ], [ -1, -.3, -1 ], [ 0, 0, 0 ], [ .25, .25, .25 ]);
+		createModel("sphere", fs, [ 0, 0, 1, 1 ], [ 1, -.3, 1 ], [ 0, 0, 0 ], [ .25, .25, .25 ]);
+		createModel("sphere", fs, [ 1, 1, 0, 1 ], [ -1, -.3, 1 ], [ 0, 0, 0 ], [ .25, .25, .25 ]);
 
 		interactiveModel = models[0];
 	}
@@ -232,14 +233,13 @@ var app = (function() {
 		mat4.lookAt(camera.vMatrix, camera.eye, camera.center, camera.up);
 
 		var currentTime = new Date().getTime();
-		if (lastTime != 0) {
+		if (lastTime !== 0) {
 			var delta = (currentTime - lastTime) / 1000.0;
 			if (animationActive) {
 				animate(delta);
 			}
 		}
 		lastTime = currentTime;
-
 		for(var i = 0; i < models.length; i++) {
 			updateTransformations(models[i]);
 
@@ -295,11 +295,13 @@ var app = (function() {
 	}
 
 	function animate(delta) {
-		var radius = 1.5;
-		var speed = Math.PI / 2;
+		var radius = 2.0; // Radius der Kreisbahn
+		var speed = Math.PI / 4; // Geschwindigkeit
+
+		angleOffset += delta * speed;
 
 		for (var i = 2; i < models.length; i++) {
-			var angle = (speed * (i - 1) + delta * speed) % (2 * Math.PI);
+			var angle = angleOffset + (i - 2) * (Math.PI / 2);
 			models[i].translate[0] = radius * Math.cos(angle);
 			models[i].translate[2] = radius * Math.sin(angle);
 
