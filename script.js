@@ -349,7 +349,7 @@ var app = ( function() {
 		gl.vertexAttribPointer(prog.normalAttrib, 3, gl.FLOAT, false, 0, 0);
 
 		// Setup rendering tris.
-		var fill = (model.fillstyle.search(/fill/) != -1);
+		var fill = (model.fillstyle.search(/fill/) !== -1);
 		if(fill) {
 			gl.enableVertexAttribArray(prog.normalAttrib);
 			gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, model.iboTris);
@@ -358,7 +358,7 @@ var app = ( function() {
 		}
 
 		// Setup rendering lines.
-		var wireframe = (model.fillstyle.search(/wireframe/) != -1);
+		var wireframe = (model.fillstyle.search(/wireframe/) !== -1);
 		if(wireframe) {
 			gl.disableVertexAttribArray(prog.normalAttrib);
 			gl.vertexAttrib3f(prog.normalAttrib, 0, 0, 0);
