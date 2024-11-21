@@ -210,11 +210,11 @@ var app = (function() {
 					break;
 			}
 
-			switch(c) {
-				case('N'):
+			switch(key) {
+				case 189: // - (minus key)
 					animationActive = false;
 					break;
-				case('M'):
+				case 187: // + (plus key)
 					animationActive = true;
 					break;
 			}
