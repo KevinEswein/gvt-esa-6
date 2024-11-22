@@ -265,12 +265,12 @@ var app = (function() {
 	function setProjection() {
 		switch(camera.projectionType) {
 			case("ortho"):
-				var v = camera.lrtb;
-				mat4.ortho(camera.pMatrix, -v, v, -v, v, -10, 10);
+				var vO = camera.lrtb;
+				mat4.ortho(camera.pMatrix, -vO, vO, -vO, vO, -10, 10);
 				break;
 			case("frustum"):
-				var v = camera.lrtb;
-				mat4.frustum(camera.pMatrix, -v/2, v/2, -v/2, v/2, 1, 10);
+				var vF = camera.lrtb;
+				mat4.frustum(camera.pMatrix, -vF/2, vF/2, -vF/2, vF/2, 1, 10);
 				break;
 			case("perspective"):
 				mat4.perspective(camera.pMatrix, camera.fovy, camera.aspect, 1, 10);
