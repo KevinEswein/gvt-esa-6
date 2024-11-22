@@ -1,6 +1,9 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html lang="de">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESA 6</title>
     <script src="ext/gl-matrix.js"></script>
     <script src="vertexData_sphere.js"></script>
     <script src="vertexData_torus.js"></script>
@@ -18,14 +21,14 @@
         varying vec4 vColor;
 
         void main(){
-        gl_Position = uPMatrix * uMVMatrix * vec4(aPosition, 1.0);
-        vec3 tNormal = uNMatrix * aNormal;
+            gl_Position = uPMatrix * uMVMatrix * vec4(aPosition, 1.0);
+            vec3 tNormal = uNMatrix * aNormal;
 
-        vColor = vec4(aNormal.x, aNormal.y, aNormal.z, 1.0);
-        vColor = vec4(aNormal.z, aNormal.z, aNormal.z, 1.0);
-        vColor = vec4(tNormal.z, tNormal.z, tNormal.z, 1.0);
-        vColor = (vColor + 1.0) / 2.0;
-        vColor = uColor * (vColor + 1.0) / 2.0;
+            vColor = vec4(aNormal.x, aNormal.y, aNormal.z, 1.0);
+            vColor = vec4(aNormal.z, aNormal.z, aNormal.z, 1.0);
+            vColor = vec4(tNormal.z, tNormal.z, tNormal.z, 1.0);
+            vColor = (vColor + 1.0) / 2.0;
+            vColor = uColor * (vColor + 1.0) / 2.0;
         }
     </script>
     <script type="x-shader/x-fragment" id="fragmentshader">
@@ -33,13 +36,59 @@
         varying vec4 vColor;
 
         void main() {
-        gl_FragColor = vColor;
+            gl_FragColor = vColor;
         }
     </script>
-	<title>ESA 6</title>
 </head>
-
 <body onload="app.start()">
-<canvas id="canvas" width="500" height="500"></canvas>
+<div id="container">
+    <div id="canvas-container">
+        <canvas id="canvas" width="500" height="500"></canvas>
+    </div>
+    <div id="documentation">
+        <h1>ESA 6 - Objekte bewegen - fliegende Kugeln</h1>
+        <h3>Dokumentation</h3>
+        <div>O = Projektionstyp orthogonal</div>
+        <div>F = Projektionstyp frustum</div>
+        <div>P = Projektionstyp perspective</div>
+        <br>
+        <div>C / Shift+C = Rotation</div>
+        <div>P = Projektionstyp Perspective</div>
+        <div>F = Projektionstyp Frustum</div>
+        <div>H / Shift+H = Kamera hoch und runter bewegen</div>
+        <div>D / Shift+D = Kamera-Distanz zum Zentrum</div>
+        <div>V / Shift+V = Öffnungswinkel ändern</div>
+        <div>B / Shift+B = Abmessung der Near-Clipping-Plane ändern</div>
+        <br>
+        <div><b>X / Shift+X</b> = Rotation um die X-Achse</div>
+        <div><b>Y / Shift+Y</b> = Rotation um die Y-Achse</div>
+        <div><b>Z / Shift+Z</b> = Rotation um die Z-Achse</div>
+        <div><b>S / Shift+S</b> = Streckung / Stauchung des Objekts</div>
+    </div>
+</div>
 </body>
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: beige;
+        display: flex;
+        justify-content: center;
+    }
+    #container {
+        display: flex;
+        margin-top: 40px;
+    }
+    #canvas-container {
+        flex: 0 0 auto;
+        border-radius: 50px;
+        overflow: hidden;
+    }
+    #documentation {
+        margin-left: 50px;
+        max-width: 500px;
+        background-color: azure;
+        padding: 20px 50px 40px;
+        border-radius: 50px;
+    }
+</style>
 </html>
