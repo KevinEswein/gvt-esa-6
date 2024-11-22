@@ -44,6 +44,12 @@
 <div id="container">
     <div id="canvas-container">
         <canvas id="canvas" width="500" height="500"></canvas>
+        <div id="controls">
+            <b>Speed:</b>
+            <button id="speed-1">normal</button>
+            <button id="speed-5">fast</button>
+            <button id="speed-50">The Flash™</button>
+        </div>
     </div>
     <div id="documentation">
         <h1>ESA 6 - Objekte bewegen - fliegende Kugeln</h1>
@@ -60,6 +66,7 @@
         <div>V / Shift+V = Öffnungswinkel ändern</div>
         <div>B / Shift+B = Abmessung der Near-Clipping-Plane ändern</div>
         <br>
+        <div><b>+ / -</b> = Start / Stop Animation</div>
         <div><b>X / Shift+X</b> = Rotation um die X-Achse</div>
         <div><b>Y / Shift+Y</b> = Rotation um die Y-Achse</div>
         <div><b>Z / Shift+Z</b> = Rotation um die Z-Achse</div>
@@ -83,12 +90,35 @@
         border-radius: 50px;
         overflow: hidden;
     }
+    #controls {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 7vh;
+        gap: 10px;
+    }
     #documentation {
         margin-left: 50px;
         max-width: 500px;
         background-color: azure;
         padding: 20px 50px 40px;
         border-radius: 50px;
+    }
+    button {
+        background-color: azure;
+        padding: 5px 10px;
+        border: 0;
+        border-radius: 1rem;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 5px;
+        width: 100px;
+        height: 50px;
+        justify-content: center;
+    }
+    button:hover {
+        background-color: #d5ffff;
     }
 </style>
 </html>

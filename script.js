@@ -24,6 +24,7 @@ var app = (function() {
 	var animationActive = true;
 	var lastTime = 0;
 	var angleOffset = 0;
+	var speedFactor = 2;
 
 	function start() {
 		init();
@@ -37,6 +38,7 @@ var app = (function() {
 		initModels();
 		initEventHandler();
 		initPipline();
+		initControls();
 	}
 
 	function initWebGL() {
@@ -223,6 +225,18 @@ var app = (function() {
 		};
 	}
 
+	function initControls() {
+		document.getElementById('speed-1').addEventListener('click', function() {
+			speedFactor = 1;
+		});
+		document.getElementById('speed-5').addEventListener('click', function() {
+			speedFactor = 5;
+		});
+		document.getElementById('speed-50').addEventListener('click', function() {
+			speedFactor = 50;
+		});
+	}
+
 	function render() {
 		gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
@@ -297,10 +311,10 @@ var app = (function() {
 
 	function animate(delta) {
 		var radius = 2;
-		var speed = Math.PI / 4;
-		var speedTorus = Math.PI / 2;
+		var speedSpheres = speedFactor * Math.PI / 4;
+		var speedTorus = speedFactor * Math.PI / 2;
 
-		angleOffset += delta * speed;
+		angleOffset += delta * speedSpheres;
 
 		for (var i = 2; i < models.length; i++) {
 			var angle = angleOffset + (i - 2) * (Math.PI / 2);
