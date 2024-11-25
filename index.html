@@ -44,11 +44,15 @@
 <div id="container">
     <div id="canvas-container">
         <canvas id="canvas" width="500" height="500"></canvas>
-        <div id="controls">
+        <div class="controls">
             <b>Speed:</b>
             <button id="speed-1">normal</button>
             <button id="speed-5">fast</button>
             <button id="speed-50">The Flash™</button>
+        </div>
+        <div class="controls">
+            <button id="side-view">Side view</button>
+            <button id="front-view">Front view</button>
         </div>
     </div>
     <div id="documentation">
@@ -90,7 +94,7 @@
         border-radius: 50px;
         overflow: hidden;
     }
-    #controls {
+    .controls {
         margin-top: 20px;
         display: flex;
         justify-content: center;

@@ -177,6 +177,7 @@ var app = (function() {
 			switch(c) {
 				case('C'):
 					camera.zAngle += sign * deltaRotate;
+					console.log(camera.zAngle);
 					break;
 				case('H'):
 					camera.eye[1] += sign * deltaTranslate;
@@ -186,6 +187,7 @@ var app = (function() {
 					break;
 				case('V'):
 					camera.fovy += sign * 5 * Math.PI / 180;
+					console.log(camera.fovy);
 					break;
 				case('B'):
 					camera.lrtb += sign * 0.1;
@@ -234,6 +236,14 @@ var app = (function() {
 		});
 		document.getElementById('speed-50').addEventListener('click', function() {
 			speedFactor = 50;
+		});
+		document.getElementById('side-view').addEventListener('click', function() {
+			camera.zAngle = 1.6;
+			camera.fovy = 1.8;
+		});
+		document.getElementById('front-view').addEventListener('click', function() {
+			camera.zAngle = 0;
+			camera.fovy = 1;
 		});
 	}
 
